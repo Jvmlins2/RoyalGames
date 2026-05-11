@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* CORES */
+    --preto: #0B0616;
+    --cinza: #221C2D;
+    --vermelho: #FF004C;
+    --roxo: #7A3BFF;
+    --branco: #FFFFFF;
+    --prata: #D6D2E6;
+
+    /* FONTES */
+    --fonte-principal: var(--font-orbitron);
+    --fonte-secundaria: var(--font-exo2);
+
+    /* TAMANHO DAS FONTES */
+    --tamanho-titulo: 50px;
+    --tamanho-titulo-responsivo: 35px;
+    --tamanho-subtitulo: 30px;
+    --tamanho-texto-btn: 17px;
+    --fonte-texto: 17px;
+}
