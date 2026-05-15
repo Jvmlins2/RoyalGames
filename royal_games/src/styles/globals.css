@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Para garantir renderização das fontes em alguns navegadores */
+    font-family: inherit;
 }
 
 :root {
@@ -11,16 +13,25 @@
     --vermelho: #FF004C;
     --roxo: #7A3BFF;
     --branco: #FFFFFF;
-    --prata: #D6D2E6;
-
-    /* FONTES */
-    --fonte-principal: var(--font-orbitron);
-    --fonte-secundaria: var(--font-exo2);
+    --cinza-claro: #D6D2E6;
+    --bgc-btn: #48425F;
 
     /* TAMANHO DAS FONTES */
     --tamanho-titulo: 50px;
     --tamanho-titulo-responsivo: 35px;
-    --tamanho-subtitulo: 30px;
+    --tamanho-subtitulo: 25px;
     --tamanho-texto-btn: 17px;
     --fonte-texto: 17px;
+}
+
+/* APLICAÇÃO GLOBAL */
+body {
+    font-family: var(--fonte-secundaria), sans-serif;
+    font-size: var(--fonte-texto);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--fonte-principal), sans-serif;
 }

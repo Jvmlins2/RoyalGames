@@ -3,14 +3,16 @@ import styles from "./footer.module.css";
 const Footer = () => {
     return (
         <footer id={styles.footer}>
-                <div id={styles.footer_icons}>
-                    <img src="./logo_footer.png" alt="" />
+                <div id={styles.itens_footer}>
+                    <img src="./logo_footer.png" alt="" id={styles.logo_footer}/>
                 </div>
                 <div id={styles.contatos}>
-                    <p>royalgames@gmail.com</p>
-                    <p>(11) 99999-9999</p>
-                    <p>@RoyalGames</p>
+                    <p id={styles.contato}>royalgames@gmail.com</p>
+                    <p id={styles.contato}>(11) 99999-9999</p>
+                    <p id={styles.contato}>@RoyalGames</p>
                 </div>
         </footer>
     )
 }
+
+export default Footer;

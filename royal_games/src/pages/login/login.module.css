@@ -1,0 +1,123 @@
+
+body {
+    background: linear-gradient(to right, #362b50 10%, var(--cinza) 40%, var(--preto) 80%);
+}
+
+#main {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    align-items: center;
+}
+
+#esquerda {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#fig1 {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#fig1 img {
+    width: 100%;
+    height: 97%;
+    object-fit: contain;
+    object-position: bottom;
+    display: block;
+}
+
+#direita {
+    width: 40%;
+    height: 80%;
+    border-style: groove;
+    border-radius: 10px;
+    border-color: var(--vermelho);
+    padding-top: 6%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 10%;
+}
+
+#fig2 img {
+    width: 100%; 
+    height: 100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); 
+}
+
+.campo_form {
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 30%;
+    margin-bottom: 10%;
+    display: flex;
+}
+
+#form div {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.campo_form label {
+    color: var(--branco);
+    font-family: var(--fonte-secundaria);
+    margin-bottom: 8px;
+}
+
+.campo_form input {
+    width: 200%;
+    padding: 12px;
+    color: var(--branco);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    opacity: 0.7;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: 0.3s ease;
+    background-image: linear-gradient(var(--preto), var(--preto)), 
+                      linear-gradient(to right, var(--branco), var(--branco), var(--branco));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    
+}
+
+#form button {
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: 50%;
+  color: var(--branco);
+    
+  opacity: .9;
+  background-image: linear-gradient(var(--cinza),var(--cinza)),linear-gradient(to right,var(--vermelho),var(--vermelho),var(--vermelho));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 2px solid#0000;
+  border-radius: 8px;
+  margin-bottom: 100%;
+  margin-left: 20%;
+  padding: 15px;
+  font-weight: bold;
+  transition: .4s;
+}
+
+#form button:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}

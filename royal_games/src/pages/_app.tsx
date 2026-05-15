@@ -5,13 +5,13 @@ import { Orbitron } from "next/font/google";
 import { Exo_2 } from "next/font/google";
 
 const orbitron = Orbitron({
-  variable: "--font-padrao",
+  variable: "--fonte-principal",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
 const exo2 = Exo_2({
-  variable: "--font-padrao",
+  variable: "--fonte-secundaria",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
