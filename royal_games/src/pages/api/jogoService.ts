@@ -63,6 +63,7 @@ export async function listarJogo() {
             imagemUrl: `${api.defaults.baseURL}${jogo.imagemUrl}`
         }));
 
+        console.log(jogos)
         return jogos;
 
     } catch (error: any) {

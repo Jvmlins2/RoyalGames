@@ -6,6 +6,7 @@ import { excluirJogo, listarJogo } from "@/pages/api/jogoService";
 import { erro, notificacao, toastConfirmarExclusao } from "@/utils/toast";
 import { verificarAutenticacao } from "@/utils/auth";
 import CardProduto from "../card-produto/card-produto";
+import { listarGenero } from "@/pages/api/generoService";
 
 interface Jogo {
     jogoID: number,
@@ -27,17 +28,16 @@ const ListaJogo = () => {
     const [jogos, setJogos] = useState<Jogo[]>([]);
     const [generos, setGeneros] = useState<Genero[]>([]);
     const [ordem, setOrdem] = useState("todos");
-    //salvar o que for escrito pelo usuário
     const [pesquisa, setPesquisa] = useState("");
-    //salva a info do usuário logado
     const [estaAutenticado, setEstaAutenticado] = useState(false);
     const [generosSelecionados, setgenerosSelecionados] = useState<number[]>([]);
 
     async function listar() {
-        try {
+        try{
             const lista = await listarJogo();
             setJogos(lista);
-        } catch (error: any) {
+            console.log(lista);
+        }catch(error: any){
             console.log(error.message)
         }
     }
@@ -90,15 +90,8 @@ const ListaJogo = () => {
                     <option value="menor_valor">menor valor</option>
                     <option value="maior_valor">maior valor</option>
                 </select>
-                <select className={styles.botao_filtrar}
-                    value={generosSelecionados.map(String)}
-                    onChange={(e) => setgenerosSelecionados(
-                    Array.from(e.target.selectedOptions).map((option) => Number(option.value))
-                    )}>
-                    {generos.map((item) => (
-                    <option value={item.generoID} key={item.generoID}>{item.nome}</option>
-                    )
-                    )}
+                <select className={styles.botao_filtrar} >
+                    <option value=""></option>
                 </select>
             </div>
             <div id={styles.cards_jogo}>
