@@ -17,15 +17,21 @@ interface Jogo {
     statusJogo: boolean
 }
 
+interface Genero {
+    generoID: number,
+    nome: string
+    }
+
 const ListaJogo = () => {
 
     const [jogos, setJogos] = useState<Jogo[]>([]);
-
+    const [generos, setGeneros] = useState<Genero[]>([]);
     const [ordem, setOrdem] = useState("todos");
     //salvar o que for escrito pelo usuário
     const [pesquisa, setPesquisa] = useState("");
     //salva a info do usuário logado
     const [estaAutenticado, setEstaAutenticado] = useState(false);
+    const [generosSelecionados, setgenerosSelecionados] = useState<number[]>([]);
 
     async function listar() {
         try {
@@ -84,15 +90,16 @@ const ListaJogo = () => {
                     <option value="menor_valor">menor valor</option>
                     <option value="maior_valor">maior valor</option>
                 </select>
-                <select name="categorias" id={styles.botao_categorias} className={styles.botao_filtrar}>
-                    <option value="categoria">categoria</option>
+                <select className={styles.botao_filtrar}
+                    value={generosSelecionados.map(String)}
+                    onChange={(e) => setgenerosSelecionados(
+                    Array.from(e.target.selectedOptions).map((option) => Number(option.value))
+                    )}>
+                    {generos.map((item) => (
+                    <option value={item.generoID} key={item.generoID}>{item.nome}</option>
+                    )
+                    )}
                 </select>
-                
-                {estaAutenticado && (
-                <div id={styles.botoes_edicao}>
-                    <button className={styles.botao}>Excluir</button>
-                    <Link className={styles.botao} href="/jogo">Editar</Link>
-                </div>)}
             </div>
             <div id={styles.cards_jogo}>
                 {jogosFiltrados.length > 0 ? jogosFiltrados.map((item) => (
@@ -111,10 +118,10 @@ const ListaJogo = () => {
                     <p>Carregando jogos...</p>
                 )}
             </div>
-           
+            {estaAutenticado && (
                 <div id={styles.listar_jogos}>
                     <button className={styles.seta}>
-                        <img src="../arrow-left.svg" alt="" />
+                        <img src="../seta-esquerda.png" alt="" />
                     </button>
                     <button className={styles.botao_lista}>1</button>
                     <button className={styles.botao_lista}>2</button>
@@ -122,10 +129,9 @@ const ListaJogo = () => {
                     <button className={styles.botao_lista}>4</button>
                     <button className={styles.botao_lista}>5</button>
                     <button className={styles.seta}>
-                        <img src="../arrow-right.svg" alt="" />
+                        <img src="../seta-direita.png" alt="" />
                     </button>
-                </div>
-            
+                </div>)}
         </>
     )
 }

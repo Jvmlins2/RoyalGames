@@ -65,16 +65,16 @@
 }
 
 .seta{
-    width: 5%;
+    width: 4%;
     height: 5vh;
     background-color: var(--cinza);
     border-color: var(--vermelho);
     color: var(--vermelho);
-
+    border-radius: 10;
 }
 
 .seta img{
-    width: 50%;
+    width: 40%;
 }
 
 input::placeholder,

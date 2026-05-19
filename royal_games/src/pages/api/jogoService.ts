@@ -5,7 +5,9 @@ type JogoFormulario = {
     nome: string,
     descricao: string,
     preco: string,
+    plataforma: string,
     imagem: File | null,
+    classificacaoId: number[],
     generoId: number[]
 }
 
@@ -14,6 +16,8 @@ interface JogoListagem {
     descricao: string,
     preco: string,
     generoId: number[],
+    classificacaoId: number[],
+    plataforma: string,
     imagemUrl: string,
     statusJogo: boolean
 }
@@ -25,12 +29,17 @@ export async function cadastrarJogo(dados: JogoFormulario) {
         formData.append("nome", dados.nome);
         formData.append("descricao", dados.descricao);
         formData.append("preco", dados.preco);
+        formData.append("plataforma", dados.plataforma);
         if (dados.imagem) {
             formData.append("imagem", dados.imagem);
         }
         dados.generoId.forEach((id) => {
             formData.append("generoIds", id.toString());
         })
+        dados.classificacaoId.forEach((id) => {
+            formData.append("classificacaoIds", id.toString());
+        })
+
 
         await api.post("Jogos", formData);
 
@@ -92,11 +101,15 @@ export async function editarJogo(jogoId: number, dados: JogoFormulario) {
         formData.append("nome", dados.nome);
         formData.append("descricao", dados.descricao);
         formData.append("preco", dados.preco);
+        formData.append("plataforma", dados.plataforma);
         if (dados.imagem) {
             formData.append("imagem", dados.imagem);
         }
         dados.generoId.forEach((id) => {
             formData.append("generoIds", id.toString());
+        })
+        dados.classificacaoId.forEach((id) => {
+            formData.append("classificacaoIds", id.toString());
         })
 
         await api.put("Jogo/" + jogoId, formData)
