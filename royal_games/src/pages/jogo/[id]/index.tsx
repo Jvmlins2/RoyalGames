@@ -5,11 +5,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { formatarPreco } from "@/utils/formatacao";
 import { listarPorId } from "@/pages/api/jogoService";
-
-interface Genero {
-  generoID: number,
-  nome: string
-}
+import { listarPlataforma } from "@/pages/api/plataformaService";
+import { listarClassificacao } from "@/pages/api/classificacaoService";
 
 const DetalheJogo = () => {
 
@@ -50,12 +47,12 @@ const DetalheJogo = () => {
     return (
         <>
             <Header />
-            <article id={styles.container}>
+            <article id={styles.main_jogo}>
                 {jogo ? (<>
                     <div id={styles.conteudo}>
-                        <h1>Destalhes do Jogo</h1>
+                        <h1>Detalhes do Jogo</h1>
                         <hr></hr>
-                        <section className={styles.sobre}>
+                        <section className={styles.detalhes}>
                             <img src={jogo.imagemUrl} alt="" />
                             <div id={styles.textos}>
                                 <h2>{jogo.nome}</h2>
@@ -77,20 +74,12 @@ const DetalheJogo = () => {
 
                                 <div className={styles.campo}>
                                     <h3>Plataformas:</h3>
-                                    <ul>
-                                        {jogo.plataforma.map((plataforma) => (
-                                            <li key={plataforma}>{plataforma}</li>
-                                        ))}
-                                    </ul>
+                                    <p>{jogo.plataforma}</p>
                                 </div>
 
                                 <div className={styles.campo}>
                                     <h3>Gêneros:</h3>
-                                    <ul>
-                                        {jogo.generos.map((genero) => (
-                                            <li key={genero}>{genero}</li>
-                                        ))}
-                                    </ul>
+                                    <p>{jogo.generos}</p>
                                 </div>
                             </div>
                         </section>

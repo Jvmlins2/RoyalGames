@@ -7,8 +7,8 @@ const Header = () => {
             <div id={styles.container}>
                     <img src="./logo.png" alt="" id={styles.logo}/>
                 <div id={styles.contatos}>
-                    <Link href="./home#catalogo" id={styles.botao}>Catálogo</Link>
-                    <Link href="./login" id={styles.botao}> Login</Link>
+                    <Link href="../home" id={styles.botao}>Catálogo</Link>
+                    <Link href="../login" id={styles.botao}> Login</Link>
                 </div>
             </div>
         </header>

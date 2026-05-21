@@ -14,15 +14,15 @@ const CardJogo = ({jogoID, nome, descricao, preco, img} : Jogo) =>{
     
     return(
         <article id={styles.card}>
-            <Link href={"/detalhe-jogo/" + jogoID}>
+            <Link href={"/jogo/" + jogoID}>
                 <img src={img} alt="" />
             </Link>
-            <h3>{descricao}</h3>
             <h3>{nome}</h3>
-            <h4>{preco}</h4>
-            <Link href={"/detalhe-jogo/" + jogoID}>
+            <h3>{descricao}</h3>
+            <h4>{formatarPreco(preco)}</h4>
+            <Link href={"/jogo/" + jogoID}>
                 <button className={styles.botao_editar}>Detalhes</button>
-            </Link>     
+            </Link>
         </article>
     )
 }

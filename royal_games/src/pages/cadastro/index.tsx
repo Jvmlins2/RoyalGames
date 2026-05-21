@@ -19,8 +19,6 @@ interface Classificacao {
     
 const Cadastro = () => {
 
-    const Jogo = () => {
-
   const [generos, setGeneros] = useState<Genero[]>([]);
   const [classificacao, setClassificacao] = useState<Classificacao[]>([]);
   const [nome, setNome] = useState<string>("");
@@ -99,12 +97,12 @@ const Cadastro = () => {
                                 <div id={styles.class_indic} className={styles.div_form}>
                                     <label htmlFor="">Classificação</label>
                                     <select 
-                                    value={generosSelecionados.map(String)}
-                                    onChange={(e) => setgenerosSelecionados(
+                                    value={classificacaoSelecionada.map(String)}
+                                    onChange={(e) => setclassificacaoSelecionada(
                                     Array.from(e.target.selectedOptions).map((option) => Number(option.value))
                                     )}>
-                                    {generos.map((item) => (
-                                    <option value={item.generoID} key={item.generoID}>{item.nome}</option>
+                                    {classificacao.map((item) => (
+                                    <option value={item.classificacaoId} key={item.classificacaoId}>{item.nome}</option>
                                     )
                                     )}
                                     </select>
@@ -142,6 +140,5 @@ const Cadastro = () => {
             <Footer />
         </>
     )
-}
 }
 export default Cadastro;

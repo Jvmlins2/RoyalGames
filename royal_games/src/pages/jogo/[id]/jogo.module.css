@@ -1,5 +1,74 @@
 #main_jogo{
-    height: 70vh;
     background-color: var(--cinza);
-    color: var(--branco)
+    color: var(--branco);
+    padding: 5%;
+}
+
+#conteudo{
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    padding: 7%;
+    width: 80%;
+    border: 1px solid var(--vermelho);
+}
+
+#conteudo h1{
+    color: var(--branco);
+    margin-bottom: 1%;
+}
+
+#conteudo hr{
+    border: 1px solid var(--vermelho);
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.sobre{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    gap: 5%;
+
+}
+
+.sobre img{
+    height: 40vh;
+}
+
+.sobre h2{
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 2%;
+}
+
+#textos{
+    display: block;
+    flex: 1;
+    white-space: unset;
+}
+
+#textos p{
+    font-family: var(--fonte-secundaria);
+}
+
+#info{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 5%;
+}
+
+#infoDireita, #infoEsquerda{
+    display: flex;
+    flex-direction: column;
+}
+
+.campo{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin: 5%;
 }
