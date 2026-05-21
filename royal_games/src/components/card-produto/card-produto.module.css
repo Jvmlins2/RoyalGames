@@ -1,0 +1,46 @@
+#card{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: #535050d9;
+    color: var(--branco);
+     border: 1px solid transparent;
+    border-color: var(--vermelho);
+    border-radius: 8px;
+    opacity: 0.7;
+    background-origin: border-box;
+    background-image: linear-gradient(var(--preto), var(--preto)), 
+                      linear-gradient(to right, var(--branco), var(--branco), var(--branco));
+    height: 100%;
+    width: 100%;
+    font-family: var(--fonte-secundaria);
+    font-size: 20px;
+    margin: 3%;
+}
+
+.botao_excluir{
+     display: flex;
+    background-color: var(--cinza);
+    border-color: var(--vermelho);
+    color: var(--branco);
+    font-size: 20px;
+    border-radius: 10;
+    align-items: center;
+    justify-content: center;
+    height: 30;
+    width: 100;
+}
+
+.botao_editar{
+    display: flex;
+    background-color: var(--vermelho);
+    color: var(--branco);
+    font-size: 20px;
+    border-radius: 10;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    height: 30;
+    width: 100;
+}

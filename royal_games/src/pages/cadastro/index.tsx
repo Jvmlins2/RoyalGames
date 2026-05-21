@@ -69,7 +69,6 @@ const Cadastro = () => {
         <>
             <Header />
             <main id={styles.main}>
-                {/* SECAO CADASTRO */}
                 <section id={styles.cadastro} className="layout_guide">
                     <h1 id={styles.titulo_cadastro}>Cadastrar novo jogo</h1>
                     <form id={styles.form} action="">
@@ -135,8 +134,6 @@ const Cadastro = () => {
                     </form>
                     <button id={styles.btn_cadastro}>Cadastrar</button>
                 </section>
-
-                {/* SECAO LISTA JOGOS */}
 
                 <h2 id={styles.titulo_lista}>Lista de jogos</h2>
                 <ListaJogo/>
