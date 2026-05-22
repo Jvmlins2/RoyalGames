@@ -3,8 +3,9 @@ import Link from "next/link";
 import Jogo from "@/pages/jogo/[id]";
 import { useEffect, useState } from "react";
 import { excluirJogo, listarJogo } from "@/pages/api/jogoService";
-import CardJogo from "../card-produto/card-produto";
-import { listarGenero } from "@/pages/api/generoService";
+import { erro, notificacao, toastConfirmarExclusao } from "@/utils/toast";
+import { verificarAutenticacao } from "@/utils/auth";
+import CardProduto from "../card-produto/card-produto";
 
 interface Jogo {
     jogoID: number,
@@ -16,30 +17,46 @@ interface Jogo {
     statusJogo: boolean
 }
 
-interface Genero {
-    generoID: number,
-    nome: string
-    }
-
 const ListaJogo = () => {
 
     const [jogos, setJogos] = useState<Jogo[]>([]);
-    const [generos, setGeneros] = useState<Genero[]>([]);
+
     const [ordem, setOrdem] = useState("todos");
     const [pesquisa, setPesquisa] = useState("");
-    const [generosSelecionados, setgenerosSelecionados] = useState<number[]>([]);
+    const [estaAutenticado, setEstaAutenticado] = useState(false);
 
     async function listar() {
-        try{
+        try {
             const lista = await listarJogo();
             setJogos(lista);
-            console.log(lista);
-        }catch(error: any){
+        } catch (error: any) {
             console.log(error.message)
         }
     }
 
+    function confirmarExclusao(jogoId: number) {
+        toastConfirmarExclusao(async () => {
+            try {
+                await excluirJogo(jogoId);
+
+                setJogos((listaAtual) =>
+                    listaAtual.map((jogo) => 
+                        jogo.jogoID === jogoId 
+                            ? {...jogo, statusJogo: false}
+                            : jogo
+                    )
+                )
+
+                notificacao("Jogo inativado!")
+                listar();
+            } catch (error: any) {
+                erro(error.message)
+            }
+        })
+    }
+
     useEffect(() => {
+        setEstaAutenticado(verificarAutenticacao());
         listar();
     }, [])
 
@@ -65,21 +82,33 @@ const ListaJogo = () => {
                     <option value="menor_valor">menor valor</option>
                     <option value="maior_valor">maior valor</option>
                 </select>
+                <select name="categorias" id={styles.botao_categorias} className={styles.botao_filtrar}>
+                    <option value="categoria">categoria</option>
+                </select>
+                
+                {estaAutenticado && (
+                <div id={styles.botoes_edicao}>
+                    <button className={styles.botao}>Excluir</button>
+                    <Link className={styles.botao} href="/jogo">Editar</Link>
+                </div>)}
             </div>
             <div id={styles.cards_jogo}>
                 {jogosFiltrados.length > 0 ? jogosFiltrados.map((item) => (
-                    <CardJogo
+                    <CardProduto
                         key={item.jogoID}
                         jogoID={item.jogoID}
                         nome={item.nome}
                         descricao={item.descricao}
                         preco={item.preco}
                         img={item.imagemUrl}
+                        onDelete={confirmarExclusao}
+                        estaLogado={estaAutenticado}
                     />
                 )) : (
                     <p>Carregando jogos...</p>
                 )}
             </div>
+           
                 <div id={styles.listar_jogos}>
                     <button className={styles.seta}>
                         <img src="../seta-esquerda.png" alt="" />
@@ -93,6 +122,7 @@ const ListaJogo = () => {
                         <img src="../seta-direita.png" alt="" />
                     </button>
                 </div>
+            
         </>
     )
 }

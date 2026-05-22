@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { formatarPreco } from "@/utils/formatacao";
 import { listarPorId } from "@/pages/api/jogoService";
-import { listarPlataforma } from "@/pages/api/plataformaService";
-import { listarClassificacao } from "@/pages/api/classificacaoService";
 
 const DetalheJogo = () => {
 

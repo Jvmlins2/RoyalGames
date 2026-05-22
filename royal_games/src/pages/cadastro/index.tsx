@@ -6,6 +6,7 @@ import ListaJogo from "@/components/lista-jogo/lista-jogo";
 import { cadastrarJogo } from "../api/jogoService";
 import { listarGenero } from "../api/generoService";
 import { notificacao, erro } from "@/utils/toast";
+import { listarClassificacao } from "../api/classificacaoService";
 
 interface Genero {
     generoID: number,
@@ -35,6 +36,12 @@ const Cadastro = () => {
     console.log(lista.data);
   }
 
+  async function listarClassificacaoEmJogo() {
+    const lista = await listarClassificacao();
+    setClassificacao(lista.data);
+    console.log(lista.data);
+  }
+
   async function Cadastrar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try{
@@ -61,6 +68,7 @@ const Cadastro = () => {
 
   useEffect(() => {
     listarGeneroEmJogo();
+    //listarClassificacaoEmJogo();
   }, [])
 
     return (
@@ -94,17 +102,15 @@ const Cadastro = () => {
                                     )}
                                     </select>
                                 </div>
-                                <div id={styles.class_indic} className={styles.div_form}>
+                               <div id={styles.class_indic} className={styles.div_form}>
                                     <label htmlFor="">Classificação</label>
-                                    <select 
-                                    value={classificacaoSelecionada.map(String)}
-                                    onChange={(e) => setclassificacaoSelecionada(
-                                    Array.from(e.target.selectedOptions).map((option) => Number(option.value))
-                                    )}>
-                                    {classificacao.map((item) => (
-                                    <option value={item.classificacaoId} key={item.classificacaoId}>{item.nome}</option>
-                                    )
-                                    )}
+                                    <select name="" id="">
+                                        <option value="">Livre</option>
+                                        <option value="">10 anos</option>
+                                        <option value="">12 anos</option>
+                                        <option value="">14 anos</option>
+                                        <option value="">16 anos</option>
+                                        <option value="">18 anos</option>
                                     </select>
                                 </div>
                             </div>
@@ -114,7 +120,7 @@ const Cadastro = () => {
                                     <input type="text"
                 value={plataforma} onChange={(e) => setPlataforma(e.target.value)} />
                                 </div>
-                                <div id={styles.imagem} className={styles.div_form}>
+                                <div className={styles.div_form}>
                                     <label htmlFor="">Imagem</label>
                                     <input type="file" onChange={(e) => {
                                     if (e.target.files && e.target.files[0]) {

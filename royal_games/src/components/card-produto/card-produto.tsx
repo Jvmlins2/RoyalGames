@@ -8,9 +8,11 @@ type Jogo ={
     descricao: string,
     preco: number,
     img: string,
+    estaLogado: boolean,
+    onDelete: (jogoId: number) => void
 }
 
-const CardJogo = ({jogoID, nome, descricao, preco, img} : Jogo) =>{
+const CardJogo = ({jogoID, nome, descricao, preco, img, estaLogado, onDelete} : Jogo) =>{
     
     return(
         <article id={styles.card}>
@@ -23,6 +25,15 @@ const CardJogo = ({jogoID, nome, descricao, preco, img} : Jogo) =>{
             <Link href={"/jogo/" + jogoID}>
                 <button className={styles.botao_editar}>Detalhes</button>
             </Link>
+            {estaLogado &&(<>
+                <button onClick={() => onDelete(jogoID)} id={styles.botao_excluir}>
+                    Excluir
+                </button>
+                <Link href={"/jogo/" + jogoID} id={styles.botao_editar}>
+                    Editar
+                </Link>
+                </>
+            )}
         </article>
     )
 }
