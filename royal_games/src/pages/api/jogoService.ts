@@ -2,13 +2,12 @@ import { api } from "./api";
 
 
 type JogoFormulario = {
-    nome: string,
-    descricao: string,
-    preco: string,
-    plataforma: string,
-    imagem: File | null,
-    classificacaoId: number[],
-    generoId: number[]
+    Nome: string,
+    Descricao: string,
+    Preco: string,
+    Imagem: File | null,
+    classificacaoIds: number[],
+    generoIds: number[]
 }
 
 interface JogoListagem {
@@ -26,19 +25,16 @@ export async function cadastrarJogo(dados: JogoFormulario) {
     try {
         const formData = new FormData();
 
-        formData.append("nome", dados.nome);
-        formData.append("descricao", dados.descricao);
-        formData.append("preco", dados.preco);
-        formData.append("plataforma", dados.plataforma);
-        if (dados.imagem) {
-            formData.append("imagem", dados.imagem);
+        formData.append("Nome", dados.Nome);
+        formData.append("Descricao", dados.Descricao);
+        formData.append("Preco", dados.Preco);
+        if (dados.Imagem) {
+            formData.append("Imagem", dados.Imagem);
         }
-        dados.generoId.forEach((id) => {
+        dados.generoIds.forEach((id) => {
             formData.append("generoIds", id.toString());
         })
-        dados.classificacaoId.forEach((id) => {
-            formData.append("classificacaoIds", id.toString());
-        })
+        formData.append("classificacaoIds", "1");
 
 
         await api.post("Jogos", formData);
@@ -99,17 +95,16 @@ export async function editarJogo(jogoId: number, dados: JogoFormulario) {
     try {
         const formData = new FormData();
 
-        formData.append("nome", dados.nome);
-        formData.append("descricao", dados.descricao);
-        formData.append("preco", dados.preco);
-        formData.append("plataforma", dados.plataforma);
-        if (dados.imagem) {
-            formData.append("imagem", dados.imagem);
+        formData.append("nome", dados.Nome);
+        formData.append("descricao", dados.Descricao);
+        formData.append("preco", dados.Preco);
+        if (dados.Imagem) {
+            formData.append("imagem", dados.Imagem);
         }
-        dados.generoId.forEach((id) => {
+        dados.generoIds.forEach((id) => {
             formData.append("generoIds", id.toString());
         })
-        dados.classificacaoId.forEach((id) => {
+        dados.classificacaoIds.forEach((id) => {
             formData.append("classificacaoIds", id.toString());
         })
 

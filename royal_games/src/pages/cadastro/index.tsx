@@ -9,15 +9,15 @@ import { notificacao, erro } from "@/utils/toast";
 import { listarClassificacao } from "../api/classificacaoService";
 
 interface Genero {
-    generoID: number,
-    nome: string
-    }
+  generoID: number,
+  nome: string
+}
 
 interface Classificacao {
-    classificacaoId: number,
-    nome: string
-    }
-    
+  classificacaoId: number,
+  nome: string
+}
+
 const Cadastro = () => {
 
   const [generos, setGeneros] = useState<Genero[]>([]);
@@ -44,22 +44,22 @@ const Cadastro = () => {
 
   async function Cadastrar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    try{
+    try {
 
       const dados = {
-        nome,
-        descricao,
-        preco,
-        imagem,
-        plataforma,
-        generoID: generosSelecionados
+        Nome: nome,
+        Descricao: descricao,
+        Preco: preco,
+        Imagem: imagem,
+        generoIds: generosSelecionados,
+        classificacaoIds: classificacaoSelecionada
       }
 
-      await Cadastrar
+      await cadastrarJogo(dados)
 
       notificacao("Jogo cadastrado!");
 
-    }catch(error: any){
+    } catch (error: any) {
       erro(error.message);
     }
 
@@ -71,80 +71,80 @@ const Cadastro = () => {
     //listarClassificacaoEmJogo();
   }, [])
 
-    return (
-        <>
-            <Header />
-            <main id={styles.main}>
-                <section id={styles.cadastro} className="layout_guide">
-                    <h1 id={styles.titulo_cadastro}>Cadastrar novo jogo</h1>
-                    <form id={styles.form} action="">
-                        <div id={styles.cadastro_esquerda}>
-                            <div id={styles.nome} className={styles.div_form}>
-                                <label htmlFor="">Nome</label>
-                                <input type="text"
-                value={nome} onChange={(e) => setNome(e.target.value)} />
-                            </div>
-                            <div id={styles.esquerda_meio}>
-                                <div id={styles.valor} className={styles.div_form}>
-                                    <label htmlFor="">Valor</label>
-                                    <input type="text" value={preco} onChange={(e) => setPreco(e.target.value)} />
-                                </div>
-                                <div id={styles.genero} className={styles.div_form}>
-                                    <label htmlFor="">Genero</label>
-                                    <select 
-                                    value={generosSelecionados.map(String)}
-                                    onChange={(e) => setgenerosSelecionados(
-                                    Array.from(e.target.selectedOptions).map((option) => Number(option.value))
-                                    )}>
-                                    {generos.map((item) => (
-                                    <option value={item.generoID} key={item.generoID}>{item.nome}</option>
-                                    )
-                                    )}
-                                    </select>
-                                </div>
-                               <div id={styles.class_indic} className={styles.div_form}>
-                                    <label htmlFor="">Classificação</label>
-                                    <select name="" id="">
-                                        <option value="">Livre</option>
-                                        <option value="">10 anos</option>
-                                        <option value="">12 anos</option>
-                                        <option value="">14 anos</option>
-                                        <option value="">16 anos</option>
-                                        <option value="">18 anos</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id={styles.esquerda_baixo}>
-                                <div id={styles.plataforma} className={styles.div_form}>
-                                    <label htmlFor="">Plataforma</label>
-                                    <input type="text"
-                value={plataforma} onChange={(e) => setPlataforma(e.target.value)} />
-                                </div>
-                                <div className={styles.div_form}>
-                                    <label htmlFor="">Imagem</label>
-                                    <input type="file" onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) {
-                                    setImagem(e.target.files[0]);
-                                   }
-                                 }}
-                                />
-                                </div>
-                            </div>
-                        </div>
-                        <div id={styles.cadastro_direita} className={styles.div_form}>
-                            <label htmlFor="">Descrição</label>
-                            <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
-                        </div>
-                    </form>
-                    <button id={styles.btn_cadastro}>Cadastrar</button>
-                </section>
+  return (
+    <>
+      <Header />
+      <main id={styles.main}>
+        <section id={styles.cadastro} className="layout_guide" >
+          <h1 id={styles.titulo_cadastro}>Cadastrar novo jogo</h1>
+          <form id={styles.form} onSubmit={Cadastrar}>
+            <div id={styles.cadastro_esquerda}>
+              <div id={styles.nome} className={styles.div_form}>
+                <label htmlFor="">Nome</label>
+                <input type="text"
+                  value={nome} onChange={(e) => setNome(e.target.value)} />
+              </div>
+              <div id={styles.esquerda_meio}>
+                <div id={styles.valor} className={styles.div_form}>
+                  <label htmlFor="">Valor</label>
+                  <input type="text" value={preco} onChange={(e) => setPreco(e.target.value)} />
+                </div>
+                <div id={styles.genero} className={styles.div_form}>
+                  <label htmlFor="">Genero</label>
+                  <select
+                    value={generosSelecionados.map(String)}
+                    onChange={(e) => setgenerosSelecionados(
+                      Array.from(e.target.selectedOptions).map((option) => Number(option.value))
+                    )}>
+                    {generos.map((item) => (
+                      <option value={item.generoID} key={item.generoID}>{item.nome}</option>
+                    )
+                    )}
+                  </select>
+                </div>
+                <div id={styles.class_indic} className={styles.div_form}>
+                  <label htmlFor="">Classificação</label>
+                  <select name="" id="">
+                    <option value="">Livre</option>
+                    <option value="">10 anos</option>
+                    <option value="">12 anos</option>
+                    <option value="">14 anos</option>
+                    <option value="">16 anos</option>
+                    <option value="">18 anos</option>
+                  </select>
+                </div>
+              </div>
+              <div id={styles.esquerda_baixo}>
+                <div id={styles.plataforma} className={styles.div_form}>
+                  <label htmlFor="">Plataforma</label>
+                  <input type="text"
+                    value={plataforma} onChange={(e) => setPlataforma(e.target.value)} />
+                </div>
+                <div className={styles.div_form}>
+                  <label htmlFor="">Imagem</label>
+                  <input type="file" onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      setImagem(e.target.files[0]);
+                    }
+                  }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div id={styles.cadastro_direita} className={styles.div_form}>
+              <label htmlFor="">Descrição</label>
+              <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
+            </div>
+            <button id={styles.btn_cadastro}>Cadastrar</button>
+          </form>
+        </section>
 
-                <h2 id={styles.titulo_lista}>Lista de jogos</h2>
-                <ListaJogo/>
-            </main>
+        <h2 id={styles.titulo_lista}>Lista de jogos</h2>
+        <ListaJogo />
+      </main>
 
-            <Footer />
-        </>
-    )
+      <Footer />
+    </>
+  )
 }
 export default Cadastro;
